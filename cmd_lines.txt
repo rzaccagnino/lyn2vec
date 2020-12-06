@@ -1,0 +1,58 @@
+########################################################################################################################
+############################################### LYN2VEC ###########################################################
+########################################################################################################################
+
+1) COMPUTE FINGERPRINT #################################################################################################
+
+    a) BASIC FINGERPRINT
+        - METHOD   : basic_fingerprint  in SCRIPT lyn2vec.py
+
+        - CMD_LINE : python lyn2vec.py --type basic --path training/ --fasta transcripts_genes.fa
+                     --type_factorization ICFL_COMB -n 4
+
+        - RETURN   : given a FASTA file (.fa or .gz) computes for each type of factorization a "fingerprint" file containing
+                     a row for each read, with the format "IDGENE FINGERPRINT", where "FINGERPRINT" is the fingerprint of
+                     the read
+
+
+        N.B.
+        * --fact create : to create a file containing the factors corresponding to the fingerprint fingerprint
+                          (--fact no_create, otherwise)
+        * --shift shift : to generate the shifts of lengths 100 (--shift no_shift, otherwise)
+        * --filter list : to consider only the reads for the genes contained in the file list_experiment.txt
+                          (--filter no_list, otherwise)
+        * --rev_com true : to create a file containing for each sequence in the input FASTA, 2 fingeprint:
+            1) fingerprint of the original sequence (IDGENE_0 FINGERPRINT)
+            2) fingerprint of the reverse and complement of the original sequence (IDGENE_1 FINGERPRINT)
+
+
+    b) GENERALIZED FINGERPRINT
+        - METHOD   : generalized_fingerprint in SCRIPT lyn2vec.py
+
+        - CMD_LINE : python lyn2vec.py --type generalized --path longreads/ --fasta sampled_read.fasta --split 300
+                     --type_factorization CFL_ICFL-30 -n 4
+
+        - RETURN   : given a FASTA file (.fa or .gz) computes for each type of factorization a "fingerprint" file containing
+                     a row for each read, with the format "IDGENE FINGERPRINT", where "FINGERPRINT" is the fingerprint of
+                     the read
+
+
+        N.B.
+        * --fact create : to create a file containing the factors corresponding to the fingerprint fingerprint
+                          (--fact no_create, otherwise)
+        * --rev_com true : to create a file containing for each sequence in the input FASTA, 2 fingeprint:
+            1) fingerprint of the original sequence (IDGENE_0 FINGERPRINT)
+            2) fingerprint of the reverse and complement of the original sequence (IDGENE_1 FINGERPRINT)
+
+
+
+    c) MAPPING FINGERPRINT
+        - METHOD   : fingerprint_mapping in SCRIPT lyn2vec.py
+
+        - CMD_LINE : python lyn2vec.py --type mapping --path mapping/ --fingerprint prova_fingerprint.txt
+
+        - RETURN   : given a TXT file comtaing a list of fingerprint (IDGENE FINGERPRINT) computes a mapped file containing
+                     a row for each fingerprint, with the format "IDGENE MAPPED_FINGERPRINT", where "MAPPED_FINGERPRINT" is the mapping of
+                     the fingerprint
+
+
